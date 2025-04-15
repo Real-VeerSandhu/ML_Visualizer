@@ -58,7 +58,7 @@ $y_i(w^T x_i + b) \\geq 1 - \\xi_i$ and $\\xi_i \\geq 0$ for all $i$
 **Polynomial**: $K(x_i, x_j) = (\\gamma x_i^T x_j + r)^d$
 
 ### Decision Function
-$f(x) = \\text{sign}\\left(\\sum_{i=1}^{n} \\alpha_i y_i K(x_i, x) + b\\right)$
+$f(x) = \\left(\\sum_{i=1}^{n} \\alpha_i y_i K(x_i, x) + b\\right)$
 
 where:
 - $w$ is the weight vector
@@ -295,69 +295,71 @@ if st.button("Start Training"):
     
     # Train final model on all data
     final_model.fit(X_scaled, y)
+    st.success('Training Complete')
     
     # Display final results
-    st.subheader("Final Model Details")
-    st.write(f"**Number of Support Vectors:** {len(final_model.support_vectors_)}")
-    st.write(f"**Training Accuracy:** {final_model.score(X_scaled, y):.4f}")
-    
-    # Create final visualization
-    fig, ax = plt.subplots(figsize=(10, 8))
-    
-    # Plot points with different markers and colors for each class
-    ax.scatter(X_scaled[np.where(y == 1)[0], 0], X_scaled[np.where(y == 1)[0], 1], 
-              marker='o', color='red', s=80, label="Class 1")
-    ax.scatter(X_scaled[np.where(y == -1)[0], 0], X_scaled[np.where(y == -1)[0], 1], 
-              marker='s', color='blue', s=80, label="Class 2")
-    
-    # Plot decision boundary
-    plot_decision_boundary(final_model, X_scaled, y, ax)
-    
-    # Add annotations for important components
-    for sv in final_model.support_vectors_:
-        ax.annotate("SV", xy=(sv[0], sv[1]), xytext=(10, 10), 
-                   textcoords='offset points', fontsize=8,
-                   arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
-    
-    ax.legend(loc='upper right')
-    ax.set_title("Final SVM Model", fontsize=14)
-    ax.set_xlabel("Feature 1", fontsize=12)
-    ax.set_ylabel("Feature 2", fontsize=12)
-    ax.grid(True, alpha=0.3)
-    st.pyplot(fig)
-    
-    # Display kernel parameters
-    st.write("**Kernel Parameters:**")
-    if kernel == "linear":
-        st.write(f"- Regularization Parameter C: {C}")
-    elif kernel == "rbf":
-        st.write(f"- Regularization Parameter C: {C}")
-        st.write(f"- Gamma: {gamma}")
-    else:  # poly
-        st.write(f"- Regularization Parameter C: {C}")
-        st.write(f"- Gamma: {gamma}")
-        st.write(f"- Degree: {degree}")
-    
-    # Additional explanation
-    st.markdown("""
-    ### What to Observe:
-    
-    1. **Support Vectors**: Points that lie on or near the decision boundary (marked with green circles). These are the critical points that define the decision boundary.
-    
-    2. **Decision Boundary**: The solid black line that separates the two classes. This is where the SVM model makes its classification decision (f(x) = 0).
-    
-    3. **Margins**: The region between the dashed lines on either side of the decision boundary. The SVM tries to maximize this margin while minimizing classification errors.
-    
-    4. **Effect of parameters**:
-       - **C (Regularization)**: Lower C values create wider margins but may allow more misclassifications. Higher C values enforce stricter classification but might lead to overfitting.
-       - **Kernel**: Different kernels create different shapes of decision boundaries:
-         - Linear: Straight line boundary (good for linearly separable data)
-         - RBF: Can create circular/curved boundaries (good for non-linear data)
-         - Polynomial: Can create complex curved boundaries (adjustable complexity)
-       - **Gamma**: Higher values lead to more complex, tightly fitted boundaries (potential overfitting)
-    
-    5. **Data patterns**: Different patterns require different kernels for optimal separation:
-       - Linear separation works well with linear kernel
-       - Circular patterns work well with RBF kernel
-       - XOR patterns typically require RBF or polynomial kernels
-    """)
+    with st.expander("**See Results**"):
+        st.subheader("Final Model Details")
+        st.write(f"**Number of Support Vectors:** {len(final_model.support_vectors_)}")
+        st.write(f"**Training Accuracy:** {final_model.score(X_scaled, y):.4f}")
+        
+        # Create final visualization
+        fig, ax = plt.subplots(figsize=(10, 8))
+        
+        # Plot points with different markers and colors for each class
+        ax.scatter(X_scaled[np.where(y == 1)[0], 0], X_scaled[np.where(y == 1)[0], 1], 
+                marker='o', color='red', s=80, label="Class 1")
+        ax.scatter(X_scaled[np.where(y == -1)[0], 0], X_scaled[np.where(y == -1)[0], 1], 
+                marker='s', color='blue', s=80, label="Class 2")
+        
+        # Plot decision boundary
+        plot_decision_boundary(final_model, X_scaled, y, ax)
+        
+        # Add annotations for important components
+        for sv in final_model.support_vectors_:
+            ax.annotate("SV", xy=(sv[0], sv[1]), xytext=(10, 10), 
+                    textcoords='offset points', fontsize=8,
+                    arrowprops=dict(arrowstyle="->", connectionstyle="arc3,rad=.2"))
+        
+        ax.legend(loc='upper right')
+        ax.set_title("Final SVM Model", fontsize=14)
+        ax.set_xlabel("Feature 1", fontsize=12)
+        ax.set_ylabel("Feature 2", fontsize=12)
+        ax.grid(True, alpha=0.3)
+        st.pyplot(fig)
+        
+        # Display kernel parameters
+        st.write("**Kernel Parameters:**")
+        if kernel == "linear":
+            st.write(f"- Regularization Parameter C: {C}")
+        elif kernel == "rbf":
+            st.write(f"- Regularization Parameter C: {C}")
+            st.write(f"- Gamma: {gamma}")
+        else:  # poly
+            st.write(f"- Regularization Parameter C: {C}")
+            st.write(f"- Gamma: {gamma}")
+            st.write(f"- Degree: {degree}")
+        
+        # Additional explanation
+        st.markdown("""
+        ### What to Observe:
+        
+        1. **Support Vectors**: Points that lie on or near the decision boundary (marked with green circles). These are the critical points that define the decision boundary.
+        
+        2. **Decision Boundary**: The solid black line that separates the two classes. This is where the SVM model makes its classification decision (f(x) = 0).
+        
+        3. **Margins**: The region between the dashed lines on either side of the decision boundary. The SVM tries to maximize this margin while minimizing classification errors.
+        
+        4. **Effect of parameters**:
+        - **C (Regularization)**: Lower C values create wider margins but may allow more misclassifications. Higher C values enforce stricter classification but might lead to overfitting.
+        - **Kernel**: Different kernels create different shapes of decision boundaries:
+            - Linear: Straight line boundary (good for linearly separable data)
+            - RBF: Can create circular/curved boundaries (good for non-linear data)
+            - Polynomial: Can create complex curved boundaries (adjustable complexity)
+        - **Gamma**: Higher values lead to more complex, tightly fitted boundaries (potential overfitting)
+        
+        5. **Data patterns**: Different patterns require different kernels for optimal separation:
+        - Linear separation works well with linear kernel
+        - Circular patterns work well with RBF kernel
+        - XOR patterns typically require RBF or polynomial kernels
+        """)
