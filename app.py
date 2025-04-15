@@ -184,6 +184,7 @@ import streamlit as st
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import pandas as pd
 import time
 
 # Set page configuration
@@ -191,8 +192,7 @@ st.set_page_config(page_title="Linear Regression Visualizer", layout="wide")
 
 st.title("Linear Regression Training Visualizer")
 st.write("""
-This app demonstrates the training process of a linear regression model using gradient descent.
-Watch as the model learns the best fit line, and see how the loss decreases over iterations.
+Watch as the model learns the line of best fit, and see how the loss decreases over iterations.
 """)
 
 # Sidebar for parameters
@@ -318,11 +318,11 @@ with col2:
 
 
 # Create a section for training progress with a dataframe
-st.subheader("Training Progress")
-df_placeholder = st.empty()
 
 # Button to start training
 if st.button("Start Training"):
+    st.subheader("Training Progress")
+    df_placeholder = st.empty()
     # Setup true line data for plotting
     x_range = np.array([0, 10])
     true_line.set_data(x_range, true_w * x_range + true_b)
