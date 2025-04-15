@@ -1,2 +1,2 @@
 # ML Visualizer
-Visual the training of machine learning algorithms in real time. All implementation is developed with Python and NumPy, no ML libraries/frameworks
+Visual the regression & classification machine learning algorithms train in real time. 
