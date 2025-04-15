@@ -15,7 +15,7 @@ Watch as the model learns the line of best fit, and see how the loss decreases o
 
 # Sidebar for parameters
 st.sidebar.header("Model Parameters")
-learning_rate = st.sidebar.slider("Learning Rate", min_value=0.001, max_value=0.1, value=0.01, step=0.001)
+learning_rate = st.sidebar.slider("Learning Rate", min_value=0.001, max_value=0.05, value=0.01, step=0.001)
 iterations = st.sidebar.slider("Number of Iterations", min_value=10, max_value=200, value=100, step=10)
 noise_level = st.sidebar.slider("Noise Level", min_value=0.0, max_value=5.0, value=2.0, step=0.1)
 sample_size = st.sidebar.slider("Sample Size", min_value=20, max_value=200, value=50, step=10)
@@ -78,6 +78,9 @@ class LinearRegression:
         predictions = self.predict(X)
         dw = -2/n * np.sum(X * (y - predictions))
         db = -2/n * np.sum(y - predictions)
+
+        dw = 2/n * np.sum(X * (predictions - y))
+        db = 2/n * np.sum(predictions - y)
         return dw, db
     
     def update_parameters(self, dw, db):
@@ -205,7 +208,7 @@ if st.button("Start Training"):
         
         # Slow down to make the animation visible
         if i < iterations:
-            time.sleep(0.1)
+            time.sleep(0.001)
     
     # Final results
     st.success(f"Training completed! Final model: y = {model.w:.4f}x + {model.b:.4f}")
