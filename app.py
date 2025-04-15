@@ -317,84 +317,79 @@ with col2:
     loss_plot = st.pyplot(fig2)
 
 
-# Create column layout
-col3, col4 = st.columns(2)
-# Create a container for iteration details with a scrollable area
-with col4:
-    st.subheader("Training Progress")
-    iteration_container = st.container()
-    with iteration_container:
-        # Create a scrollable area for iterations
-        iteration_details = st.empty()
+# Create a section for training progress with a dataframe
+st.subheader("Training Progress")
+df_placeholder = st.empty()
+
+# Button to start training
+if st.button("Start Training"):
+    # Setup true line data for plotting
+    x_range = np.array([0, 10])
+    true_line.set_data(x_range, true_w * x_range + true_b)
+    
+    # Initialize dataframe for training progress
+    df_data = {
+        "Iteration": [],
+        "Weight (w)": [],
+        "Bias (b)": [],
+        "Loss": []
+    }
+    training_df = pd.DataFrame(df_data)
+    
+    # Add initial parameters
+    new_row = {
+        "Iteration": "Initial",
+        "Weight (w)": f"{model.w:.4f}",
+        "Bias (b)": f"{model.b:.4f}",
+        "Loss": f"{model.compute_loss(X, y):.4f}"
+    }
+    training_df = pd.concat([training_df, pd.DataFrame([new_row])], ignore_index=True)
+    
+    # Update dataframe display
+    df_placeholder.dataframe(training_df, height=200)
+    
+    # Train the model step by step
+    for i in range(1, iterations + 1):
+        # Update model for one iteration
+        current_loss = model.compute_loss(X, y)
+        dw, db = model.compute_gradients(X, y)
+        model.update_parameters(dw, db)
+        model.loss_history.append(current_loss)
+        model.w_history.append(model.w)
+        model.b_history.append(model.b)
         
-        # Create columns for iteration details table
-        iter_cols = st.columns([1, 2, 2, 2])
-        iter_cols[0].markdown("**Iteration**")
-        iter_cols[1].markdown("**Weight (w)**")
-        iter_cols[2].markdown("**Bias (b)**")
-        iter_cols[3].markdown("**Loss**")
+        # Update model plot
+        x_pred = np.array([0, 10])
+        y_pred = model.predict(x_pred)
+        line.set_data(x_pred, y_pred)
         
-        # Create a placeholder for the scrollable content
-        iteration_table = st.empty()
-with col3:
-    # Button to start training
-    if st.button("Start Training"):
-        # Setup true line data for plotting
-        x_range = np.array([0, 10])
-        true_line.set_data(x_range, true_w * x_range + true_b)
+        # Update loss plot
+        iterations_so_far = list(range(len(model.loss_history)))
+        loss_line.set_data(iterations_so_far, model.loss_history)
+        ax2.relim()
+        ax2.autoscale_view()
         
-        # Prepare for iteration logging
-        iteration_logs = []
+        # Add current iteration to the dataframe
+        new_row = {
+            "Iteration": f"{i}",
+            "Weight (w)": f"{model.w:.4f}",
+            "Bias (b)": f"{model.b:.4f}",
+            "Loss": f"{model.compute_loss(X, y):.4f}"
+        }
+        training_df = pd.concat([training_df, pd.DataFrame([new_row])], ignore_index=True)
         
-        # Train the model step by step
-        for i in range(iterations + 1):
-            # Update model for one iteration if not at the start
-            if i > 0:
-                current_loss = model.compute_loss(X, y)
-                dw, db = model.compute_gradients(X, y)
-                model.update_parameters(dw, db)
-                model.loss_history.append(current_loss)
-                model.w_history.append(model.w)
-                model.b_history.append(model.b)
-            
-            # Update model plot
-            x_pred = np.array([0, 10])
-            y_pred = model.predict(x_pred)
-            line.set_data(x_pred, y_pred)
-            
-            # Update loss plot
-            iterations_so_far = list(range(len(model.loss_history)))
-            loss_line.set_data(iterations_so_far, model.loss_history)
-            ax2.relim()
-            ax2.autoscale_view()
-            
-            # Add current iteration details to the log
-            if i == 0:
-                iteration_logs.append(f"Initial: w = {model.w:.4f}, b = {model.b:.4f}, Loss = {model.compute_loss(X, y):.4f}")
-            else:
-                iteration_logs.append(f"Iter {i}: w = {model.w:.4f}, b = {model.b:.4f}, Loss = {model.compute_loss(X, y):.4f}")
-            
-            # Update iteration table with scrollable area
-            with iteration_table.container():
-                for idx, log in enumerate(iteration_logs):
-                    if idx == 0:
-                        st.markdown(f"**{log}**")
-                    else:
-                        cols = st.columns([1, 2, 2, 2])
-                        cols[0].write(f"{idx}")
-                        cols[1].write(f"{model.w_history[idx-1]:.4f}")
-                        cols[2].write(f"{model.b_history[idx-1]:.4f}")
-                        cols[3].write(f"{model.loss_history[idx-1]:.4f}")
-            
-            # Refresh plots
-            model_plot.pyplot(fig1)
-            loss_plot.pyplot(fig2)
-            
-            # Slow down to make the animation visible
-            if i < iterations:
-                time.sleep(0.1)
+        # Update dataframe display
+        df_placeholder.dataframe(training_df, height=200)
         
-        # Final results
-        st.success(f"Training completed! Final model: y = {model.w:.4f}x + {model.b:.4f}")
-        st.info(f"True model: y = {true_w:.2f}x + {true_b:.2f}")
-        st.info(f"Final loss: {model.compute_loss(X, y):.4f}")
+        # Refresh plots
+        model_plot.pyplot(fig1)
+        loss_plot.pyplot(fig2)
+        
+        # Slow down to make the animation visible
+        if i < iterations:
+            time.sleep(0.1)
+    
+    # Final results
+    st.success(f"Training completed! Final model: y = {model.w:.4f}x + {model.b:.4f}")
+    st.info(f"True model: y = {true_w:.2f}x + {true_b:.2f}")
+    st.info(f"Final loss: {model.compute_loss(X, y):.4f}")
