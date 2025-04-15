@@ -76,8 +76,7 @@ class LinearRegression:
     def compute_gradients(self, X, y):
         n = len(X)
         predictions = self.predict(X)
-        dw = -2/n * np.sum(X * (y - predictions))
-        db = -2/n * np.sum(y - predictions)
+
 
         dw = 2/n * np.sum(X * (predictions - y))
         db = 2/n * np.sum(predictions - y)
