@@ -48,7 +48,7 @@ st.markdown("---")
 
 
 # Available Algorithms Section
-st.markdown("## 🧠 Available Algorithms")
+st.markdown("## Available Algorithms")
 
 # Supervised Learning
 st.markdown("### Supervised Learning")
@@ -102,7 +102,7 @@ with col2:
 st.markdown("---")
 
 # How it Works Section
-st.markdown("## 🔍 How It Works")
+st.markdown("## How It Works")
 
 col1, col2 = st.columns(2)
 
@@ -110,13 +110,13 @@ with col1:
     st.markdown("""
     ### Getting Started
     
-    **🎛️ 1. Choose Your Algorithm**
+    **1. Choose Your Algorithm**
     Select from various machine learning algorithms including regression, classification, and clustering methods.
     
-    **⚙️ 2. Adjust Parameters**
+    **2. Adjust Parameters**
     Customize learning rates, sample sizes, noise levels, and algorithm-specific parameters using interactive controls.
     
-    **▶️ 3. Watch & Learn**
+    **3. Watch & Learn**
     Hit play and watch the algorithm train in real-time with live visualizations and progress tracking.
     """)
 
@@ -124,51 +124,51 @@ with col2:
     st.markdown("""
     ### Deep Understanding
     
-    **📊 4. Analyze Results**
+    **4. Analyze Results**
     View detailed training progress, convergence plots, and final model performance metrics.
     
-    **🧮 5. Understand Math**
+    **5. Understand Math**
     Follow along with complete mathematical explanations, equations, and gradient computations.
     
-    **🔄 6. Experiment**
+    **6. Experiment**
     Try different parameters and see how they affect training speed, accuracy, and convergence.
     """)
 
 st.markdown("---")
 
-# Educational Value Section
-st.markdown("## 🎓 Perfect for Learning")
+# # Educational Value Section
+# st.markdown("## 🎓 Perfect for Learning")
 
-col1, col2, col3 = st.columns(3)
+# col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.markdown("""
-    ### 👨‍🎓 Students
-    - Visualize complex ML concepts
-    - See theory put into practice
-    - Interactive homework assistance
-    - Understand algorithm behavior
-    """)
+# with col1:
+#     st.markdown("""
+#     ### 👨‍🎓 Students
+#     - Visualize complex ML concepts
+#     - See theory put into practice
+#     - Interactive homework assistance
+#     - Understand algorithm behavior
+#     """)
 
-with col2:
-    st.markdown("""
-    ### 👩‍🏫 Educators
-    - Engaging teaching tool
-    - Live classroom demonstrations
-    - Clear step-by-step explanations
-    - Interactive learning materials
-    """)
+# with col2:
+#     st.markdown("""
+#     ### 👩‍🏫 Educators
+#     - Engaging teaching tool
+#     - Live classroom demonstrations
+#     - Clear step-by-step explanations
+#     - Interactive learning materials
+#     """)
 
-with col3:
-    st.markdown("""
-    ### 👨‍💻 Practitioners
-    - Algorithm comparison tools
-    - Parameter tuning insights
-    - Quick prototyping platform
-    - Visual debugging aid
-    """)
+# with col3:
+#     st.markdown("""
+#     ### 👨‍💻 Practitioners
+#     - Algorithm comparison tools
+#     - Parameter tuning insights
+#     - Quick prototyping platform
+#     - Visual debugging aid
+#     """)
 
-st.markdown("---")
+# st.markdown("---")
 
 # Technical Details
 st.markdown("## 🛠️ Technical Information")
