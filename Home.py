@@ -205,11 +205,11 @@ with col3:
 st.markdown("---")
 
 # Call to Action
-st.markdown("## 🚀 Ready to Explore Machine Learning?")
-st.markdown("Choose an algorithm from the sidebar and start your interactive ML journey today!")
+st.markdown("## Quick Start")
+st.markdown("Choose an algorithm from the sidebar and start exploring")
 
 # Quick Start Guide
-with st.expander("📋 Quick Start Guide"):
+with st.expander("Quick Start Guide"):
     st.markdown("""
     ### Getting Started in 6 Easy Steps:
     
@@ -220,7 +220,7 @@ with st.expander("📋 Quick Start Guide"):
     5. **Watch & Learn**: Observe real-time training with live plots and progress tables
     6. **Experiment**: Try different parameters to see how they affect learning
     
-    ### 💡 Pro Tips:
+    ### Tips:
     - Start with default parameters for your first run
     - Try extreme values to see algorithm behavior
     - Pay attention to convergence patterns
@@ -231,4 +231,5 @@ with st.expander("📋 Quick Start Guide"):
 
 # Footer
 st.markdown("---")
-st.markdown("*Built with ❤️ using Streamlit for interactive machine learning education*")
+st.markdown("*Built with using Streamlit for interactive machine learning education*")
+st.markdown("*Veer Sandhu 2025*")
