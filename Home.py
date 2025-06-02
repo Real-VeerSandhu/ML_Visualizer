@@ -171,7 +171,7 @@ st.markdown("---")
 # st.markdown("---")
 
 # Technical Details
-st.markdown("## 🛠️ Technical Information")
+st.markdown("## Technical Information")
 
 col1, col2, col3 = st.columns(3)
 
