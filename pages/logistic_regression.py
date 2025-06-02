@@ -6,9 +6,9 @@ import pandas as pd
 import time
 
 # Set page configuration
-st.set_page_config(page_title="Logistic Regression Visualizer", layout="wide")
+st.set_page_config(page_title="Logistic Regression Visualizer", layout="wide", page_icon="📊")
 
-st.title("Logistic Regression Training Visualizer")
+st.title("Logistic Regression Visualizer")
 st.write("""
 Watch as the model learns the decision boundary, and see how the loss decreases over iterations.
 """)
@@ -21,7 +21,7 @@ class_separation = st.sidebar.slider("Class Separation", min_value=0.5, max_valu
 sample_size = st.sidebar.slider("Sample Size", min_value=20, max_value=200, value=100, step=10)
 
 # Sidebar for mathematical explanations
-st.sidebar.header("Mathematical Foundations")
+st.sidebar.header("Equations")
 st.sidebar.markdown("""
 ### Logistic Regression Model
 $p(y=1|x) = \\sigma(wx + b)$ where $\\sigma(z) = \\frac{1}{1+e^{-z}}$
@@ -303,3 +303,39 @@ if st.button("Start Training"):
     st.success(f"Training completed! Final model: {decision_eq}")
     st.info(true_eq)
     st.info(f"Final loss: {model.compute_loss(X, y):.4f}")
+
+st.markdown("---")
+st.subheader("Understanding Logistic Regression")
+
+col_edu1, col_edu2 = st.columns(2)
+
+with col_edu1:
+    st.markdown("""
+    **How Logistic Regression Works:**
+    
+    1. **Sigmoid Function**: Maps any real value to probability between 0 and 1
+    2. **Decision Boundary**: Creates linear boundary in feature space for classification
+    3. **Log-Likelihood**: Uses maximum likelihood estimation instead of MSE
+    4. **Gradient Descent**: Optimizes weights to maximize likelihood of correct predictions
+    """)
+
+with col_edu2:
+    st.markdown("""
+    **Key Parameters:**
+    
+    - **Learning Rate**: Controls convergence speed (0.01-0.1 typically works well)
+    - **Regularization**: L1/L2 penalty to prevent overfitting
+    - **Max Iterations**: Number of optimization steps
+    - **Tolerance**: Convergence threshold for stopping criteria
+    """)
+
+# Interactive explanation
+st.subheader("Try Different Parameters")
+st.write("""
+Experiment with different parameters to see how they affect logistic regression:
+
+- **Higher learning rate**: Faster training but may oscillate around optimum
+- **Regularization strength**: Higher values create simpler, more generalizable models  
+- **More iterations**: Better convergence, especially for complex datasets
+- **Different solvers**: Various optimization algorithms (lbfgs, liblinear, etc.)
+""")

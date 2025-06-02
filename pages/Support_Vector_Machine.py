@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from matplotlib.colors import ListedColormap
 
 # Set page configuration
-st.set_page_config(page_title="SVM Classification Visualizer", layout="wide")
+st.set_page_config(page_title="SVM Classification Visualizer", layout="wide", page_icon="📊")
 
 st.title("Support Vector Machine (SVM) Classification Visualizer")
 st.write("""
@@ -40,7 +40,7 @@ pattern_type = st.sidebar.selectbox("Pattern Type",
                                   help="Type of pattern for the generated data")
 
 # Sidebar for mathematical explanations
-st.sidebar.header("Mathematical Foundations")
+st.sidebar.header("Equations")
 st.sidebar.markdown("""
 ### SVM Objective Function
 The SVM solves the following optimization problem:
@@ -363,3 +363,39 @@ if st.button("Start Training"):
         - Circular patterns work well with RBF kernel
         - XOR patterns typically require RBF or polynomial kernels
         """)
+
+st.markdown("---")
+st.subheader("Understanding Support Vector Machines")
+
+col_edu1, col_edu2 = st.columns(2)
+
+with col_edu1:
+    st.markdown("""
+    **How SVM Works:**
+    
+    1. **Maximum Margin**: Finds the hyperplane that maximally separates classes
+    2. **Support Vectors**: Only data points closest to boundary affect the model
+    3. **Kernel Trick**: Maps data to higher dimensions for non-linear separation
+    4. **Soft Margin**: Allows some misclassification to handle noisy data
+    """)
+
+with col_edu2:
+    st.markdown("""
+    **Key Parameters:**
+    
+    - **C Parameter**: Regularization strength (low C = simple, high C = complex)
+    - **Kernel**: Linear, RBF, polynomial determine decision boundary shape
+    - **Gamma**: Controls influence of single training examples (RBF kernel)
+    - **Degree**: Polynomial degree for polynomial kernel
+    """)
+
+# Interactive explanation
+st.subheader("Try Different Parameters")
+st.write("""
+Experiment with different parameters to see how they affect SVM:
+
+- **Higher C**: More complex boundaries, potential overfitting
+- **RBF vs Linear**: RBF can capture non-linear patterns, linear is simpler
+- **Higher gamma**: Creates more complex, tightly-fit decision boundaries
+- **Different kernels**: Polynomial, sigmoid kernels for specialized patterns
+""")

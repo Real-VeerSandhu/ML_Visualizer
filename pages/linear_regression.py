@@ -6,9 +6,9 @@ import pandas as pd
 import time
 
 # Set page configuration
-st.set_page_config(page_title="Linear Regression Visualizer", layout="wide")
+st.set_page_config(page_title="Linear Regression Visualizer", layout="wide", page_icon="📊")
 
-st.title("Linear Regression Training Visualizer")
+st.title("Linear Regression Visualizer")
 st.write("""
 Watch as the model learns the line of best fit, and see how the loss decreases over iterations.
 """)
@@ -21,7 +21,7 @@ noise_level = st.sidebar.slider("Noise Level", min_value=0.0, max_value=5.0, val
 sample_size = st.sidebar.slider("Sample Size", min_value=20, max_value=200, value=50, step=10)
 
 # Sidebar for mathematical explanations
-st.sidebar.header("Mathematical Foundations")
+st.sidebar.header("Equations")
 st.sidebar.markdown("""
 ### Linear Regression Model
 $y = wx + b$
@@ -213,3 +213,39 @@ if st.button("Start Training"):
     st.success(f"Training completed! Final model: y = {model.w:.4f}x + {model.b:.4f}")
     st.info(f"True model: y = {true_w:.2f}x + {true_b:.2f}")
     st.info(f"Final loss: {model.compute_loss(X, y):.4f}")
+
+st.markdown("---")
+st.subheader("Understanding Linear Regression")
+
+col_edu1, col_edu2 = st.columns(2)
+
+with col_edu1:
+    st.markdown("""
+    **How Linear Regression Works:**
+    
+    1. **Model**: Assumes a linear relationship between features and target: y = wx + b
+    2. **Loss Function**: Uses Mean Squared Error to measure prediction accuracy
+    3. **Gradient Descent**: Iteratively adjusts weights to minimize the loss function
+    4. **Prediction**: Makes predictions by computing the linear combination of features
+    """)
+
+with col_edu2:
+    st.markdown("""
+    **Key Parameters:**
+    
+    - **Learning Rate**: Controls step size during gradient descent (too high = instability)
+    - **Iterations**: Number of gradient descent steps (more = better convergence)
+    - **Noise Level**: Amount of random variation in the data
+    - **Sample Size**: Number of training examples (more = better estimates)
+    """)
+
+# Interactive explanation
+st.subheader("Try Different Parameters")
+st.write("""
+Experiment with different parameters to see how they affect linear regression:
+
+- **Higher learning rate**: Faster convergence but risk of overshooting
+- **More iterations**: Better convergence but diminishing returns
+- **Higher noise**: Makes the line harder to fit, higher final loss
+- **More samples**: Generally leads to more stable and accurate results
+""")
