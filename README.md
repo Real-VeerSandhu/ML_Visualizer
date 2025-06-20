@@ -2,6 +2,8 @@
 
 **Interactive Machine Learning Algorithm Visualization Platform**
 
+Dashboard [here](https://machine-learning-visualizer.streamlit.app/)
+
 ## Overview
 
 ML Visualizer is a comprehensive educational platform that provides real-time visualization of machine learning algorithms during training. The application enables users to observe algorithm convergence, parameter optimization, and decision boundary formation through interactive demonstrations of fundamental machine learning concepts. All algorithms are built with vanilla Python and NumPy with minimal use of external libraries. 
