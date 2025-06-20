@@ -56,7 +56,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
-    **📈 Linear Regression**
+    **Linear Regression**
     - *Regression Algorithm*
     - Watch gradient descent find the line of best fit
     - Visualize loss function optimization
@@ -64,7 +64,7 @@ with col1:
 
 with col2:
     st.markdown("""
-    **🛡️ Support Vector Machine**
+    **Support Vector Machine**
     - *Classification Algorithm*
     - Visualize optimal decision boundary formation
     - See margin maximization in action
@@ -72,7 +72,7 @@ with col2:
 
 with col3:
     st.markdown("""
-    **📊 Logistic Regression**
+    **Logistic Regression**
     - *Classification Algorithm*
     - Observe probability-based classification learning
     - Watch sigmoid function optimization
@@ -84,7 +84,7 @@ col1, col2, col3 = st.columns(3)
 
 with col1:
     st.markdown("""
-    **🎯 K-Means Clustering**
+    **K-Means Clustering**
     - *Clustering Algorithm*
     - See centroids move to find natural data clusters
     - Watch WCSS minimization process
@@ -92,7 +92,7 @@ with col1:
 
 with col2:
     st.markdown("""
-    **🌳 Decision Trees**
+    **Decision Trees**
     - *Tree-based Algorithm*
     - See how trees split data for classification
     - Visualize recursive partitioning
