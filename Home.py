@@ -231,5 +231,6 @@ with st.expander("Quick Start Guide"):
 
 # Footer
 st.markdown("---")
-st.markdown("*Built using Streamlit for interactive machine learning education*")
+st.markdown("*Built using Python, NumPy, Matplotlib*")
 st.markdown("Veer Sandhu - 2025")
+st.caption("[Github](https://github.com/Real-VeerSandhu/ML_Visualizer)")
