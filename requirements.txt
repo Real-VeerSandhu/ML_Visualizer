@@ -4,3 +4,4 @@ pandas
 streamlit
 scikit-learn
 scopy
+seaborn
