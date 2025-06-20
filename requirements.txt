@@ -2,4 +2,5 @@ numpy
 matplotlib
 pandas
 streamlit
-sklearn
+scikit-learn
+scopy
